@@ -409,7 +409,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1410<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1418<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -419,7 +419,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1410
+                %% Rev. 261021_1418
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -443,7 +443,7 @@
 
                 %% 1차 송달 여부
                 F --> G{"송달"}:::decision
-                G -- "YES (수령)" --> H{"2주 내 이의신청?"}:::decision
+                G -- "YES (수령)" --> H{"이의신청?<br>(2주 대기)"}:::decision
 
                 %% 폐문부재 시 보정명령
                 G -- "NO (폐문부재)" --> I["법원 주소보정명령서 요청 / 발부<br>➡️ 1901호 주민등록초본 발급<br><small><i>(예상: 송달불능 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
