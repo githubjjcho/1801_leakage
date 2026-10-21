@@ -36,17 +36,57 @@
                 lineColor: '#64748b',
                 secondaryColor: '#fef3c7',
                 tertiaryColor: '#f1f5f9',
-                fontSize: '15.5px',
+                fontSize: '16.5px',
                 fontFamily: '-apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif'
             },
             flowchart: {
                 curve: 'basis',
-                nodeSpacing: 22,
-                rankSpacing: 42,
+                nodeSpacing: 20,
+                rankSpacing: 40,
                 htmlLabels: true,
-                padding: 14
+                padding: 12
             }
         });
+
+        // 다이어그램 좌우 여백을 정확히 30% 이하(최소 안전 여백)로 줄여 스마트폰 글자 극대화
+        function fitDiagramMargins() {
+            const svg = document.querySelector('.mermaid svg');
+            if (!svg) return false;
+            try {
+                const bbox = svg.getBBox();
+                if (bbox && bbox.width > 50 && bbox.height > 50) {
+                    // 좌우 여백을 기존의 30% 수준인 6px만 남김
+                    const padX = 6;
+                    const padY = 12;
+                    const newX = Math.round(bbox.x - padX);
+                    const newY = Math.round(bbox.y - padY);
+                    const newW = Math.round(bbox.width + padX * 2);
+                    const newH = Math.round(bbox.height + padY * 2);
+
+                    svg.setAttribute('viewBox', `${newX} ${newY} ${newW} ${newH}`);
+                    svg.style.maxWidth = '100%';
+                    svg.style.width = '100%';
+                    svg.style.height = 'auto';
+                    return true;
+                }
+            } catch (e) {
+                // DOM 레이아웃 전 일시적 오류 무시
+            }
+            return false;
+        }
+
+        // SVG 렌더링 완료 감지 및 여백 트리밍 실행
+        window.addEventListener('DOMContentLoaded', () => {
+            let count = 0;
+            const timer = setInterval(() => {
+                count++;
+                if (fitDiagramMargins() || count > 40) {
+                    clearInterval(timer);
+                }
+            }, 80);
+        });
+        window.addEventListener('load', fitDiagramMargins);
+        window.addEventListener('resize', fitDiagramMargins);
 
         function updateCountdown() {
             // 우체국 보관 등기우편 수령 마감 시간: 평일 18:00
@@ -269,8 +309,9 @@
 
         .mermaid svg {
             width: 100% !important;
-            max-width: 900px !important;
+            max-width: 950px !important;
             height: auto !important;
+            display: block;
         }
 
         /* Detailed Guide Cards */
@@ -311,19 +352,23 @@
 
         @media (max-width: 640px) {
             body {
-                padding: 12px 2px;
+                padding: 10px 0px;
             }
             .canvas-box {
-                padding: 16px 2px;
-                border-radius: 8px;
+                padding: 14px 0px;
+                border-radius: 4px;
+            }
+            .container {
+                width: 100%;
+                padding: 0;
             }
             .header {
-                padding-left: 4px;
-                padding-right: 4px;
+                padding-left: 8px;
+                padding-right: 8px;
             }
             .guide-grid {
-                padding-left: 2px;
-                padding-right: 2px;
+                padding-left: 4px;
+                padding-right: 4px;
             }
         }
 
@@ -364,7 +409,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1406<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1410<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -374,7 +419,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1406
+                %% Rev. 261021_1410
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
