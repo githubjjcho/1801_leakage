@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>102동 1801호 누수 대응 법적 절차 순서도</title>
+    <!-- Mermaid JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#e0f2fe',
+                primaryTextColor: '#0369a1',
+                primaryBorderColor: '#38bdf8',
+                lineColor: '#64748b',
+                secondaryColor: '#fef3c7',
+                tertiaryColor: '#f1f5f9',
+                fontSize: '14px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif'
+            },
+            flowchart: {
+                curve: 'basis',
+                nodeSpacing: 45,
+                rankSpacing: 50
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --accent: #f97316;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Malgun Gothic', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 30px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: var(--card-bg);
+            color: #fff;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #334155;
+            border-color: #64748b;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #ea580c;
+        }
+
+        /* Flowchart Canvas Box */
+        .canvas-box {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 40px 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        .mermaid {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Detailed Guide Cards */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .guide-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .guide-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-card p {
+            font-size: 14px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #fb923c;
+            font-weight: 700;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 0;
+            }
+
+            .btn-group,
+            .badge {
+                display: none;
+            }
+
+            .canvas-box {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .guide-card {
+                border: 1px solid #ccc;
+                background: #fff;
+                color: #000;
+            }
+
+            .guide-card p {
+                color: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <div class="badge">검암2차 풍림아이원 102동 1801호 누수 분쟁 대응</div>
+                <h1>상황별 법적 대응 및 강제집행 절차 순서도</h1>
+                <div class="meta">작성 기준일: 2026. 10. 21. | 대리인: 조재진 | Rev. 261021_0950 (공시송달 및 기간 추가)</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
+            </div>
+        </div>
+
+        <!-- Flowchart Diagram -->
+        <div class="canvas-box">
+            <div class="mermaid">
+                %% Rev. 261021_0950
+                graph TD
+                classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
+                classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
+                classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#92400e,font-weight:bold;
+                classDef success fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#15803d,font-weight:bold;
+                classDef warning fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#b91c1c,font-weight:bold;
+
+                A["내용증명 등기 발송(10/15 우체국 접수)<br>관리사무소 기전실 작업일지 포함"]:::process --> B{"수취인 수령 여부?"}:::decision
+
+                %% 합의 분기
+                B -- "수령 후 대화" --> C["윗집 일배책 보험 접수<br>또는 현금 합의 배상"]:::success
+                C --> END1["천장 원상복구 및 종결"]:::startEnd
+
+                %% 반송 및 지급명령 분기
+                B -- "1,2차 폐문부재<br>10/22(목) 반송 확정" --> D["기존에 확보 된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 지금과 동일
+                복원<br>견적서B : SMC 천장재 복원"]:::process
+                D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br>*(예상: 접수 후 1~2주)*"]:::process
+                E --> F["법원 지급명령 정본<br>우편 송달 실시<br>*(예상: 발송 후 약 1주)*"]:::process
+
+                %% 1차 송달 여부
+                F --> G{"송달"}:::decision
+                G -- "YES (수령)" --> H{"2주 내 이의신청?"}:::decision
+
+                %% 폐문부재 시 보정명령
+                G -- "NO (폐문부재)" --> I["법원 주소보정명령서 발부<br>➡️ 1901호 주민등록초본 발급<br>*(예상: 송달불능 후 1~2주)*"]:::process
+                I --> J{"초본상<br>주소 변동 확인"}:::decision
+
+                J -- "주소 동일 (실거주)" --> L["야간·휴일 특별송달 신청<br>법원 집행관 직접 방문<br>*(예상: 배정 및 방문 2~3주)*"]:::warning
+                K --> F
+
+                J -- "이사 감 (주소 다름)" --> K["주소보정서 제출<br>➡️ 신주소지로 재송달"]:::process
+
+                %% 특별송달 결과
+                L --> M{"특별송달 성공?"}:::decision
+                M -- "YES (전달 완료)" --> H
+                M -- "NO (수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br>*(예상: 기일 지정까지 1~2개월)*"]:::warning
+
+                %% 이의신청 여부에 따른 확정 및 소송
+                H -- "NO (2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br>*(예상: 14일 무대응 시 즉시)*"]:::success
+                H -- "YES (과다청구 등 억지)" --> N
+
+                %% 공시송달 및 강제집행
+                N --> P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br>*(예상: 허가 및 승소까지 약 2~3개월)*"]:::process
+                P --> Q["강제집행 돌입<br>1901호 은행계좌 및 부동산 압류<br> 계속 무대응 시 신용불량 등록<br>*(예상: 신청 후 압류 결정까지 3~4주)*"]:::success
+                O --> Q
+                Q --> END2["수리비 + 연 12% 지연이자 + 소송비용 전액 환수"]:::startEnd
+            </div>
+        </div>
+
+        <!-- Key Action Guide Cards -->
+        <div class="guide-grid">
+            <div class="guide-card">
+                <h3>📌 1. 반송 확정 직후 준비 (10/22)</h3>
+                <p>
+                    • 우체국 반송 내역 캡처 확보<br>
+                    • 아는 설비업체 통해 <strong>VAT 포함 정식 견적서 2장</strong> 발급<br>
+                    - A안: 기존 자재(석고보드+도배)<br>
+                    - B안: 현대 표준(SMC 방수 돔천장)<br>
+                    • 견적 내역: 소제구 보수, 시공비, 폐기물, <strong>분진 청소 용역비</strong> 포함
+                </p>
+            </div>
+            <div class="guide-card">
+                <h3>⚖️ 2. 법원 송달 회피 시 필승법</h3>
+                <p>
+                    • 법원 등기마저 부재 시 <strong>'주소보정명령'</strong>으로 1901호 주민등록초본 합법 발급<br>
+                    • 주소가 맞다면 <strong>'야간·휴일 특별송달'</strong> 신청하여 법원 집행관이 저녁/주말에 직접 방문 전달<br>
+                    • 특별송달 비용 및 법정 지연이자(연 12%)는 <strong>1901호가 전액 부담</strong>
+                </p>
+            </div>
+            <div class="guide-card">
+                <h3>🛡️ 3. 어르신 안심 창구 단일화</h3>
+                <p>
+                    • 모든 신청서에 <span class="highlight">대리인(조재진) 연락처</span> 명시<br>
+                    • 대법원 전자소송을 통해 100% 비대면 진행<br>
+                    • 1901호에서 방문하더라도 대화하지 마시고 <strong>"대리인에게 연락하라"</strong>고 전달
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
