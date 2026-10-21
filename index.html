@@ -43,7 +43,8 @@
                 curve: 'basis',
                 nodeSpacing: 45,
                 rankSpacing: 50,
-                htmlLabels: true
+                htmlLabels: true,
+                padding: 28
             }
         });
 
@@ -191,9 +192,22 @@
             background: #ea580c;
         }
 
-        /* Countdown Badge */
+        /* Countdown Badge & Mermaid Overflow Fix */
         .edgeLabel, .edgeLabel foreignObject, .edgeLabel div, .edgeLabel span {
             overflow: visible !important;
+        }
+
+        .node foreignObject {
+            overflow: visible !important;
+        }
+
+        .node .label {
+            line-height: 1.6 !important;
+        }
+
+        .node foreignObject div {
+            padding-bottom: 6px !important;
+            box-sizing: border-box !important;
         }
 
         .countdown-badge {
@@ -332,7 +346,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1350<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1402<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -342,7 +356,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1350
+                %% Rev. 261021_1402
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -350,48 +364,48 @@
                 classDef success fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#15803d,font-weight:bold;
                 classDef warning fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#b91c1c,font-weight:bold;
 
-                A["내용증명 등기 발송(10/15 우체국 접수)<br>관리사무소 기전실 작업일지 포함"]:::process --> B{"수취인 수령 여부?"}:::decision
+                A["내용증명 등기 발송(10/15 우체국 접수)<br>관리사무소 기전실 작업일지 포함<span style='display:block;height:6px;'></span>"]:::process --> B{"수취인 수령 여부?"}:::decision
 
                 %% 합의 분기
-                B -- "YES<br>(수령 후 원만한 합의)" --> C["윗집 일배책 보험 접수<br>또는 현금 합의 배상"]:::success
-                C --> END1["천장 원상복구 및 종결"]:::startEnd
+                B -- "YES<br>(수령 후 원만한 합의)" --> C["윗집 일배책 보험 접수<br>또는 현금 합의 배상<span style='display:block;height:6px;'></span>"]:::success
+                C --> END1["천장 원상복구 및 종결<span style='display:block;height:4px;'></span>"]:::startEnd
 
                 %% 수령 후 거부/무대응 분기
                 B -- "YES<br>(수령했으나 배상 거부/무대응)" --> D
 
                 %% 반송 및 지급명령 분기
-                B -- "NO (폐문부재)<br>10/21(수) 18:00 반송 확정<br><span class='countdown-badge return-countdown'>⏳ 남은시간: 00시간 00분 00초</span>" --> D["기존에 확보된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 기존과 동일 복원<br>견적서B : SMC 천장재 복원"]:::process
-                D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br><small><i>(예상: 접수 후 1~2주)</i></small>"]:::process
-                E --> F["법원 지급명령 정본<br>우편 송달<br><small><i>(예상: 발송 후 약 1주)</i></small>"]:::process
+                B -- "NO (폐문부재)<br>10/21(수) 18:00 반송 확정<br><span class='countdown-badge return-countdown'>⏳ 남은시간: 00시간 00분 00초</span>" --> D["기존에 확보된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 기존과 동일 복원<br>견적서B : SMC 천장재 복원<span style='display:block;height:10px;'></span>"]:::process
+                D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br><small><i>(예상: 접수 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                E --> F["법원 지급명령 정본<br>우편 송달<br><small><i>(예상: 발송 후 약 1주)</i></small><span style='display:block;height:6px;'></span>"]:::process
 
                 %% 1차 송달 여부
                 F --> G{"송달"}:::decision
                 G -- "YES (수령)" --> H{"2주 내 이의신청?"}:::decision
 
                 %% 폐문부재 시 보정명령
-                G -- "NO (폐문부재)" --> I["법원 주소보정명령서 요청 / 발부<br>➡️ 1901호 주민등록초본 발급<br><small><i>(예상: 송달불능 후 1~2주)</i></small>"]:::process
+                G -- "NO (폐문부재)" --> I["법원 주소보정명령서 요청 / 발부<br>➡️ 1901호 주민등록초본 발급<br><small><i>(예상: 송달불능 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
                 I --> J{"초본상<br>주소 변동 확인"}:::decision
 
-                J -- "주소 동일 (실거주)" --> L["야간·휴일 특별송달 신청<br>법원 집행관 직접 방문<br><small><i>(예상: 배정 및 방문 2~3주)</i></small>"]:::warning
+                J -- "주소 동일 (실거주)" --> L["야간·휴일 특별송달 신청<br>법원 집행관 직접 방문<br><small><i>(예상: 배정 및 방문 2~3주)</i></small><span style='display:block;height:6px;'></span>"]:::warning
                 K --> F
 
-                J -- "주소 다름 (이사 등)" --> K["주소보정서 제출<br>➡️ 신주소지로 재송달"]:::process
+                J -- "주소 다름 (이사 등)" --> K["주소보정서 제출<br>➡️ 신주소지로 재송달<span style='display:block;height:6px;'></span>"]:::process
 
                 %% 특별송달 결과
                 L --> M{"특별송달"}:::decision
                 M -- "YES<br>(전달 완료)" --> H
-                M -- "NO<br>(수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br><small><i>(예상: 기일 지정까지 1~2개월)</i></small>"]:::warning
+                M -- "NO<br>(수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br><small><i>(예상: 기일 지정까지 1~2개월)</i></small><span style='display:block;height:6px;'></span>"]:::warning
 
                 %% 이의신청 여부에 따른 확정 및 소송
-                H -- "NO<br>(2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br><small><i>(예상: 14일 무대응 시 즉시)</i></small>"]:::success
-                H -- "YES<br>(과다청구 등 억지 이의)" --> R["일반 민사 소액재판 자동 전환<br>기전실 일지·A/B 견적으로 승소 판결<br><small><i>(예상: 변론 및 판결 2~3개월)</i></small>"]:::process
+                H -- "NO<br>(2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br><small><i>(예상: 14일 무대응 시 즉시)</i></small><span style='display:block;height:6px;'></span>"]:::success
+                H -- "YES<br>(과다청구 등 억지 이의)" --> R["일반 민사 소액재판 자동 전환<br>기전실 일지·A/B 견적으로 승소 판결<br><small><i>(예상: 변론 및 판결 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
 
                 %% 공시송달 및 강제집행
-                N --> P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br><small><i>(예상: 허가 및 승소까지 약 2~3개월)</i></small>"]:::process
-                P --> Q["강제집행 돌입<br>1901호 은행계좌 및 부동산 압류<br> 계속 무대응 시 신용불량 등록<br><small><i>(예상: 신청 후 압류 결정까지 3~4주)</i></small>"]:::success
+                N --> P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br><small><i>(예상: 허가 및 승소까지 약 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                P --> Q["강제집행 돌입<br>1901호 은행계좌 및 부동산 압류<br> 계속 무대응 시 신용불량 등록<br><small><i>(예상: 신청 후 압류 결정까지 3~4주)</i></small><span style='display:block;height:6px;'></span>"]:::success
                 O --> Q
                 R --> Q
-                Q --> END2["수리비 + 연 12% 지연이자 + 소송비용 전액 환수"]:::startEnd
+                Q --> END2["수리비 + 연 12% 지연이자 + 소송비용 전액 환수<span style='display:block;height:4px;'></span>"]:::startEnd
             </div>
         </div>
 
