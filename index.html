@@ -250,7 +250,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1311<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1318<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -260,7 +260,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1311
+                %% Rev. 261021_1318
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -277,29 +277,29 @@
                 %% 반송 및 지급명령 분기
                 B -- "1,2차 폐문부재<br>10/22(목) 반송 확정" --> D["기존에 확보 된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 지금과 동일 복원<br>견적서B : SMC 천장재 복원"]:::process
                 D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br>*(예상: 접수 후 1~2주)*"]:::process
-                E --> F["법원 지급명령 정본<br>우편 송달 실시<br>*(예상: 발송 후 약 1주)*"]:::process
+                E --> F["법원 지급명령 정본<br>우편 송달<br>*(예상: 발송 후 약 1주)*"]:::process
 
                 %% 1차 송달 여부
                 F --> G{"송달"}:::decision
                 G -- "YES (수령)" --> H{"2주 내 이의신청?"}:::decision
 
                 %% 폐문부재 시 보정명령
-                G -- "NO (폐문부재)" --> I["법원 주소보정명령서 발부<br>➡️ 1901호 주민등록초본 발급<br>*(예상: 송달불능 후 1~2주)*"]:::process
+                G -- "NO (폐문부재)" --> I["법원 주소보정명령서 요청 / 발부<br>➡️ 1901호 주민등록초본 발급<br>*(예상: 송달불능 후 1~2주)*"]:::process
                 I --> J{"초본상<br>주소 변동 확인"}:::decision
 
                 J -- "주소 동일 (실거주)" --> L["야간·휴일 특별송달 신청<br>법원 집행관 직접 방문<br>*(예상: 배정 및 방문 2~3주)*"]:::warning
                 K --> F
 
-                J -- "이사 감 (주소 다름)" --> K["주소보정서 제출<br>➡️ 신주소지로 재송달"]:::process
+                J -- "주소 다름 (이사 등)" --> K["주소보정서 제출<br>➡️ 신주소지로 재송달"]:::process
 
                 %% 특별송달 결과
-                L --> M{"특별송달 성공?"}:::decision
-                M -- "YES (전달 완료)" --> H
-                M -- "NO (수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br>*(예상: 기일 지정까지 1~2개월)*"]:::warning
+                L --> M{"특별송달"}:::decision
+                M -- "YES<br>(전달 완료)" --> H
+                M -- "NO<br>(수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br>*(예상: 기일 지정까지 1~2개월)*"]:::warning
 
                 %% 이의신청 여부에 따른 확정 및 소송
-                H -- "NO (2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br>*(예상: 14일 무대응 시 즉시)*"]:::success
-                H -- "YES (과다청구 등 억지)" --> N
+                H -- "NO<br>(2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br>*(예상: 14일 무대응 시 즉시)*"]:::success
+                H -- "YES<br>(과다청구 등 억지)" --> N
 
                 %% 공시송달 및 강제집행
                 N --> P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br>*(예상: 허가 및 승소까지 약 2~3개월)*"]:::process
