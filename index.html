@@ -87,42 +87,6 @@
         });
         window.addEventListener('load', fitDiagramMargins);
         window.addEventListener('resize', fitDiagramMargins);
-
-        function updateCountdown() {
-            // 우체국 보관 등기우편 수령 마감 시간: 평일 18:00
-            const targetDate = new Date('2026-10-21T18:00:00+09:00').getTime();
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-
-            const elements = document.querySelectorAll('.return-countdown');
-            if (!elements.length) return;
-
-            let text = '';
-            let isExpired = false;
-
-            if (diff <= 0) {
-                text = '🚨 10/21 18:00 반송 확정 완료 (지급명령 신청)';
-                isExpired = true;
-            } else {
-                const totalSecs = Math.floor(diff / 1000);
-                const hours = Math.floor(totalSecs / 3600);
-                const mins = Math.floor((totalSecs % 3600) / 60);
-                const secs = totalSecs % 60;
-                const pad = (n) => String(n).padStart(2, '0');
-                text = `⏳ 남은시간: ${hours}시간 ${pad(mins)}분 ${pad(secs)}초`;
-            }
-
-            elements.forEach(el => {
-                el.innerText = text;
-                if (isExpired) {
-                    el.classList.add('expired');
-                }
-            });
-        }
-
-        setInterval(updateCountdown, 1000);
-        const initTimer = setInterval(updateCountdown, 100);
-        setTimeout(() => clearInterval(initTimer), 3000);
     </script>
     <style>
         :root {
@@ -414,7 +378,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1527<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 22. | Rev. 261022_0840<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -424,7 +388,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1527
+                %% Rev. 261022_0840
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -442,7 +406,7 @@
                 B -- "YES<br>수령했으나 무대응(배상 거부)" --> D
 
                 %% 반송 및 지급명령 분기
-                B -- "NO (폐문부재)<br>10/21(수) 18:00 반송 확정<br><span class='countdown-badge return-countdown'>⏳ 남은시간: 00시간 00분 00초</span>" --> D["기존에 확보된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 기존과 동일 복원<br>견적서B : SMC 천장재 복원<span style='display:block;height:10px;'></span>"]:::process
+                B -- "NO (폐문부재)" --> D["기존에 확보된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 기존과 동일 복원<br>견적서B : SMC 천장재 복원<span style='display:block;height:10px;'></span>"]:::process
                 D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br><small><i>(예상: 접수 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
                 E --> F["법원 지급명령 정본<br>우편 송달<br><small><i>(예상: 발송 후 약 1주)</i></small><span style='display:block;height:6px;'></span>"]:::process
 
@@ -480,7 +444,7 @@
         <!-- Key Action Guide Cards -->
         <div class="guide-grid">
             <div class="guide-card">
-                <h3>📌 1. 반송 확정 직후 준비 (10/21 18:00) <span class="countdown-badge return-countdown" style="font-size:11.5px; margin-left:auto;"></span></h3>
+                <h3>📌 1. 반송 확정 직후 준비</h3>
                 <p>
                     • 우체국 반송 내역 캡처 확보<br>
                     • 아는 설비업체 통해 <strong>VAT 포함 정식 견적서 2장</strong> 발급<br>
