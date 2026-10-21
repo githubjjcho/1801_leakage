@@ -48,7 +48,7 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            padding: 30px 20px;
+            padding: 24px 10px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -140,7 +140,7 @@
         .canvas-box {
             background: #ffffff;
             border-radius: 14px;
-            padding: 40px 20px;
+            padding: 30px 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             display: flex;
             justify-content: center;
@@ -152,6 +152,12 @@
             width: 100%;
             display: flex;
             justify-content: center;
+        }
+
+        .mermaid svg {
+            width: 100% !important;
+            max-width: 900px !important;
+            height: auto !important;
         }
 
         /* Detailed Guide Cards */
@@ -227,7 +233,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1256<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1302<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -237,7 +243,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1256
+                %% Rev. 261021_1302
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
