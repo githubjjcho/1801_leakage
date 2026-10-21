@@ -242,15 +242,6 @@
             stroke-linecap: round !important;
         }
 
-        .cluster rect {
-            fill: none !important;
-            stroke: none !important;
-        }
-
-        .cluster text, .cluster .nodeLabel {
-            display: none !important;
-        }
-
         .node foreignObject {
             overflow: visible !important;
         }
@@ -423,7 +414,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1544<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1527<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -433,7 +424,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1544
+                %% Rev. 261021_1527
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -471,24 +462,17 @@
                 %% 특별송달 결과
                 L --> M{"특별송달"}:::decision
                 M -- "YES<br>(전달 완료)" --> H
+                M -- "NO<br>(수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br><small><i>(예상: 기일 지정까지 1~2개월)</i></small><span style='display:block;height:6px;'></span>"]:::warning
 
-                %% 이의신청 여부에 따른 확정 및 소송 (H 바로 밑 레벨)
+                %% 이의신청 여부에 따른 확정 및 소송
                 H -- "NO<br>(2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br><small><i>(예상: 14일 무대응 시 즉시)</i></small><span style='display:block;height:6px;'></span>"]:::success
                 H -- "YES<br>(이의신청 접수)" --> R["일반 민사 소액재판 자동 전환<br>기전실 일지·A/B 견적으로 승소 판결<br><small><i>(예상: 변론 및 판결 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
 
-                %% 소송절차 회부 신청 (기존 공시송달 위치로 하향 이동)
-                M -- "NO<br>(수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br><small><i>(예상: 기일 지정까지 1~2개월)</i></small><span style='display:block;height:6px;'></span>"]:::warning
-                R ~~~ N
-
-                %% 공시송달 신청 (소송절차 회부 신청 밑으로 더 이동)
+                %% 공시송달 및 강제집행 (좌->중->우 정렬로 화살표 꺾임 및 교차 방지)
                 N --> P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br><small><i>(예상: 허가 및 승소까지 약 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
-
-                %% 강제집행 돌입 (공시송달 밑으로 더 이동)
                 O --> Q["강제집행 돌입<br>1901호 은행계좌 및 부동산 압류<br> 계속 무대응 시 신용불량 등록<br><small><i>(예상: 신청 후 압류 결정까지 3~4주)</i></small><span style='display:block;height:6px;'></span>"]:::success
                 R --> Q
                 P --> Q
-
-                %% 채권 전액 환수 종결 (최하단으로 더 이동)
                 Q --> END2["수리비 + 연 12% 지연이자 + 소송비용 전액 환수<span style='display:block;height:4px;'></span>"]:::startEnd
             </div>
         </div>
