@@ -27,6 +27,7 @@
     <script>
         mermaid.initialize({
             startOnLoad: true,
+            securityLevel: 'loose',
             theme: 'base',
             themeVariables: {
                 primaryColor: '#e0f2fe',
@@ -41,9 +42,46 @@
             flowchart: {
                 curve: 'basis',
                 nodeSpacing: 45,
-                rankSpacing: 50
+                rankSpacing: 50,
+                htmlLabels: true
             }
         });
+
+        function updateCountdown() {
+            // Target: 2026-10-22 19:00:00 KST
+            const targetDate = new Date('2026-10-22T19:00:00+09:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const elements = document.querySelectorAll('.return-countdown');
+            if (!elements.length) return;
+
+            let text = '';
+            let isExpired = false;
+
+            if (diff <= 0) {
+                text = '🚨 10/22 19:00 반송 확정 완료 (지급명령 신청)';
+                isExpired = true;
+            } else {
+                const totalSecs = Math.floor(diff / 1000);
+                const hours = Math.floor(totalSecs / 3600);
+                const mins = Math.floor((totalSecs % 3600) / 60);
+                const secs = totalSecs % 60;
+                const pad = (n) => String(n).padStart(2, '0');
+                text = `⏳ 남은시간: ${hours}시간 ${pad(mins)}분 ${pad(secs)}초`;
+            }
+
+            elements.forEach(el => {
+                el.innerText = text;
+                if (isExpired) {
+                    el.classList.add('expired');
+                }
+            });
+        }
+
+        setInterval(updateCountdown, 1000);
+        const initTimer = setInterval(updateCountdown, 100);
+        setTimeout(() => clearInterval(initTimer), 3000);
     </script>
     <style>
         :root {
@@ -153,6 +191,43 @@
             background: #ea580c;
         }
 
+        /* Countdown Badge */
+        .countdown-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #f87171;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 800;
+            margin-top: 4px;
+            letter-spacing: -0.3px;
+            box-shadow: 0 1px 3px rgba(220, 38, 38, 0.15);
+            animation: pulse-countdown 2s infinite ease-in-out;
+            white-space: nowrap;
+        }
+
+        .countdown-badge.expired {
+            background: #f1f5f9;
+            color: #475569;
+            border-color: #94a3b8;
+            animation: none;
+        }
+
+        @keyframes pulse-countdown {
+            0%, 100% {
+                border-color: #f87171;
+                background-color: #fef2f2;
+            }
+            50% {
+                border-color: #dc2626;
+                background-color: #fee2e2;
+            }
+        }
+
         /* Flowchart Canvas Box */
         .canvas-box {
             background: #ffffff;
@@ -250,7 +325,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1318<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 21. | Rev. 261021_1332<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -260,7 +335,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261021_1318
+                %% Rev. 261021_1332
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -275,8 +350,7 @@
                 C --> END1["천장 원상복구 및 종결"]:::startEnd
 
                 %% 반송 및 지급명령 분기
-                B -- "1,2차 폐문부재<br>10/22(목) 반송 확정" --> D["기존에 확보 된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 지금과 동일
-                복원<br>견적서B : SMC 천장재 복원"]:::process
+                B -- "1,2차 폐문부재<br>10/22(목) 19:00 반송 확정<br><span class='countdown-badge return-countdown'>⏳ 계산 중...</span>" --> D["기존에 확보 된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 지금과 동일 복원<br>견적서B : SMC 천장재 복원"]:::process
                 D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br>*(예상: 접수 후 1~2주)*"]:::process
                 E --> F["법원 지급명령 정본<br>우편 송달<br>*(예상: 발송 후 약 1주)*"]:::process
 
@@ -313,7 +387,7 @@
         <!-- Key Action Guide Cards -->
         <div class="guide-grid">
             <div class="guide-card">
-                <h3>📌 1. 반송 확정 직후 준비 (10/22)</h3>
+                <h3>📌 1. 반송 확정 직후 준비 (10/22) <span class="countdown-badge return-countdown" style="font-size:11.5px; margin-left:auto;"></span></h3>
                 <p>
                     • 우체국 반송 내역 캡처 확보<br>
                     • 아는 설비업체 통해 <strong>VAT 포함 정식 견적서 2장</strong> 발급<br>
