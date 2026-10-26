@@ -215,6 +215,11 @@
             display: none !important;
         }
 
+        s, del {
+            text-decoration: line-through !important;
+            text-decoration-thickness: 2px !important;
+        }
+
         .node foreignObject {
             overflow: visible !important;
         }
@@ -387,7 +392,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_1010<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_1015<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -397,7 +402,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261026_1010
+                %% Rev. 261026_1015
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -408,11 +413,11 @@
                 A["내용증명 등기 발송(10/15 우체국 접수)<br>관리사무소 기전실 작업일지 포함<span style='display:block;height:6px;'></span>"]:::process --> B{"수취인 수령 여부?"}:::decision
 
                 %% 합의 분기
-                B -- "YES<br>(수령 후 원만한 합의)" --> C["윗집 일배책 보험 접수<br>또는 현금 합의 배상<span style='display:block;height:6px;'></span>"]:::success
-                C --> END1["천장 원상복구 및 종결<span style='display:block;height:4px;'></span>"]:::startEnd
+                B -- "<s>YES</s><br><s>(수령 후 원만한 합의)</s>" --> C["<s>윗집 일배책 보험 접수</s><br><s>또는 현금 합의 배상</s><span style='display:block;height:6px;'></span>"]:::success
+                C --> END1["<s>천장 원상복구 및 종결</s><span style='display:block;height:4px;'></span>"]:::startEnd
 
                 %% 수령 후 거부/무대응 분기
-                B -- "YES<br>수령했으나 무대응(배상 거부)" --> D
+                B -- "<s>YES</s><br><s>수령했으나 무대응(배상 거부)</s>" --> D
 
                 %% 반송 및 지급명령 분기
                 B -- "NO (1·2차 폐문부재<br>10/22 반송 확정)" --> D["핵심 입증 증거 확보 완료<br>• 소갑1: 기전실 작업일지 / 소갑2: 내용증명·반송내역<br>• 소갑3: 비교견적서 A(146만원) / B(SMC 132만원)<br>• 소갑4: 피해 사진·영상 / 소갑5: 등기부등본<span style='display:block;height:6px;'></span>"]:::process
