@@ -392,7 +392,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_1015<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_1020<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -402,7 +402,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261026_1015
+                %% Rev. 261026_1020
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -420,7 +420,7 @@
                 B -- "<s>YES</s><br><s>수령했으나 무대응(배상 거부)</s>" --> D
 
                 %% 반송 및 지급명령 분기
-                B -- "NO (1·2차 폐문부재<br>10/22 반송 확정)" --> D["핵심 입증 증거 확보 완료<br>• 소갑1: 기전실 작업일지 / 소갑2: 내용증명·반송내역<br>• 소갑3: 비교견적서 A(146만원) / B(SMC 132만원)<br>• 소갑4: 피해 사진·영상 / 소갑5: 등기부등본<span style='display:block;height:6px;'></span>"]:::process
+                B -- "NO (1·2차 폐문부재<br>10/22 반송 확정)" --> D["핵심 입증 증거 확보 완료<br><span style='font-size:14px; line-height:1.5;'>• 소갑1: 기전실 작업일지 / 소갑2: 내용증명·반송내역<br>• 소갑3: 비교견적서 / A(SMC 132만원) / B(146만원)<br>• 소갑4: 피해 사진·영상 / 소갑5: 등기부등본</span><span style='display:block;height:6px;'></span>"]:::process
                 D --> E["대법원 전자소송 지급명령 신청<br>• 청구원금: 1,452,000원 (B안+VAT)<br>• 독촉절차비용: 75,960원 (송달료·인지대·내용증명비)<br>• 실무 위임인: 조재진 지정 <small><i>(예상: 접수 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
                 E --> F["법원 지급명령 정본<br>우편 송달<br><small><i>(예상: 발송 후 약 1주)</i></small><span style='display:block;height:6px;'></span>"]:::process
 
