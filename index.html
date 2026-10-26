@@ -206,6 +206,15 @@
             stroke-linecap: round !important;
         }
 
+        .cluster rect {
+            fill: none !important;
+            stroke: none !important;
+        }
+
+        .cluster text, .cluster .nodeLabel {
+            display: none !important;
+        }
+
         .node foreignObject {
             overflow: visible !important;
         }
@@ -378,7 +387,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 22. | Rev. 261022_0840<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_0950<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -388,7 +397,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261022_0840
+                %% Rev. 261026_0950
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -412,7 +421,7 @@
 
                 %% 1차 송달 여부
                 F --> G{"송달"}:::decision
-                G -- "YES (수령)" --> H{"이의신청?<br>(2주 대기)"}:::decision
+                G -- "YES (수령)" --> H
 
                 %% 폐문부재 시 보정명령
                 G -- "NO (폐문부재)" --> I["법원 주소보정명령서 요청 / 발부<br>➡️ 1901호 주민등록초본 발급<br><small><i>(예상: 송달불능 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
@@ -426,14 +435,26 @@
                 %% 특별송달 결과
                 L --> M{"특별송달"}:::decision
                 M -- "YES<br>(전달 완료)" --> H
-                M -- "NO<br>(수취 거부/폐문)" --> N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br><small><i>(예상: 기일 지정까지 1~2개월)</i></small><span style='display:block;height:6px;'></span>"]:::warning
+                M -- "NO<br>(수취 거부/폐문)" --> N
 
-                %% 이의신청 여부에 따른 확정 및 소송
-                H -- "NO<br>(2주 무대응)" --> O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br><small><i>(예상: 14일 무대응 시 즉시)</i></small><span style='display:block;height:6px;'></span>"]:::success
-                H -- "YES<br>(이의신청 접수)" --> R["일반 민사 소액재판 자동 전환<br>기전실 일지·A/B 견적으로 승소 판결<br><small><i>(예상: 변론 및 판결 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                %% 중간 단계: 이의신청 대기 및 소송절차 회부 (동일 레벨 그룹화)
+                subgraph Phase_Decision [" "]
+                    H{"이의신청?<br>(2주 대기)"}:::decision
+                    N["소송절차 회부 신청<br>➡️ 일반 민사 소액재판 전환<br><small><i>(예상: 기일 지정까지 1~2개월)</i></small><span style='display:block;height:6px;'></span>"]:::warning
+                end
 
-                %% 공시송달 및 강제집행 (좌->중->우 정렬로 화살표 꺾임 및 교차 방지)
-                N --> P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br><small><i>(예상: 허가 및 승소까지 약 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                H -- "NO<br>(2주 무대응)" --> O
+                H -- "YES<br>(이의신청 접수)" --> R
+                N --> P
+
+                %% 최종 집행권원 확보 단계: 확정 및 승소 판결 (동일 레벨 그룹화)
+                subgraph Phase_Judgement [" "]
+                    O["지급명령 최종 확정<br>판결문과 동일 효력 확보<br><small><i>(예상: 14일 무대응 시 즉시)</i></small><span style='display:block;height:6px;'></span>"]:::success
+                    R["일반 민사 소액재판 자동 전환<br>기전실 일지·A/B 견적으로 승소 판결<br><small><i>(예상: 변론 및 판결 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                    P["공시송달 신청<br>법원 게시 후 14일 경과 시 송달 효력<br><small><i>(예상: 허가 및 승소까지 약 2~3개월)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                end
+
+                %% 강제집행 돌입 (O, R, P 3개 집행권원에서 직결)
                 O --> Q["강제집행 돌입<br>1901호 은행계좌 및 부동산 압류<br> 계속 무대응 시 신용불량 등록<br><small><i>(예상: 신청 후 압류 결정까지 3~4주)</i></small><span style='display:block;height:6px;'></span>"]:::success
                 R --> Q
                 P --> Q
