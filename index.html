@@ -387,7 +387,7 @@
         <div class="header">
             <div>
                 <h1>상황별 법적 대응 및<br>강제집행 절차 순서도</h1>
-                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_0950<br>대리인: 조재진</div>
+                <div class="meta">작성 기준일: 2026. 10. 26. | Rev. 261026_1010<br>대리인: 조재진</div>
             </div>
             <div class="btn-group">
                 <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
@@ -397,7 +397,7 @@
         <!-- Flowchart Diagram -->
         <div class="canvas-box">
             <div class="mermaid">
-                %% Rev. 261026_0950
+                %% Rev. 261026_1010
                 graph TD
                 classDef startEnd fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a;
                 classDef process fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
@@ -415,8 +415,8 @@
                 B -- "YES<br>수령했으나 무대응(배상 거부)" --> D
 
                 %% 반송 및 지급명령 분기
-                B -- "NO (폐문부재)" --> D["기존에 확보된 '기전실 작업일지' 및<br>설비업체 A/B 견적서 확보<br><br>견적서A : 기존과 동일 복원<br>견적서B : SMC 천장재 복원<span style='display:block;height:10px;'></span>"]:::process
-                D --> E["대법원 전자소송 소액 지급명령 신청<br>실무 위임인 조재진 지정<br><small><i>(예상: 접수 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
+                B -- "NO (1·2차 폐문부재<br>10/22 반송 확정)" --> D["핵심 입증 증거 확보 완료<br>• 소갑1: 기전실 작업일지 / 소갑2: 내용증명·반송내역<br>• 소갑3: 비교견적서 A(146만원) / B(SMC 132만원)<br>• 소갑4: 피해 사진·영상 / 소갑5: 등기부등본<span style='display:block;height:6px;'></span>"]:::process
+                D --> E["대법원 전자소송 지급명령 신청<br>• 청구원금: 1,452,000원 (B안+VAT)<br>• 독촉절차비용: 75,960원 (송달료·인지대·내용증명비)<br>• 실무 위임인: 조재진 지정 <small><i>(예상: 접수 후 1~2주)</i></small><span style='display:block;height:6px;'></span>"]:::process
                 E --> F["법원 지급명령 정본<br>우편 송달<br><small><i>(예상: 발송 후 약 1주)</i></small><span style='display:block;height:6px;'></span>"]:::process
 
                 %% 1차 송달 여부
@@ -455,27 +455,25 @@
                 end
 
                 %% 강제집행 돌입 (O, R, P 3개 집행권원에서 직결)
-                O --> Q["강제집행 돌입<br>1901호 은행계좌 및 부동산 압류<br> 계속 무대응 시 신용불량 등록<br><small><i>(예상: 신청 후 압류 결정까지 3~4주)</i></small><span style='display:block;height:6px;'></span>"]:::success
+                O --> Q["강제집행 돌입<br>• 1901호 은행계좌 및 부동산(아파트) 압류<br>• 미변제 시 채무불이행자명부 등재(신용불량)<br><small><i>(예상: 신청 후 압류 결정까지 3~4주)</i></small><span style='display:block;height:6px;'></span>"]:::success
                 R --> Q
                 P --> Q
-                Q --> END2["수리비 + 연 12% 지연이자 + 소송비용 전액 환수<span style='display:block;height:4px;'></span>"]:::startEnd
+                Q --> END2["원금 1,452,000원 + 독촉절차비용(75,960원+α)<br>+ 연 12% 지연손해금 전액 환수<span style='display:block;height:4px;'></span>"]:::startEnd
             </div>
         </div>
 
         <!-- Key Action Guide Cards -->
         <div class="guide-grid">
             <div class="guide-card">
-                <h3>📌 1. 반송 확정 직후 준비</h3>
+                <h3>📌 1. 지급명령 청구 및 입증 세팅</h3>
                 <p>
-                    • 우체국 반송 내역 캡처 확보<br>
-                    • 아는 설비업체 통해 <strong>VAT 포함 정식 견적서 2장</strong> 발급<br>
-                    - A안: 기존 자재(석고보드+도배)<br>
-                    - B안: 현대 표준(SMC 방수 돔천장)<br>
-                    • 견적 내역: 소제구 보수, 시공비, 폐기물, <strong>분진 청소 용역비</strong> 포함
+                    • 소갑 제1~5호증 완비 (작업일지, 반송내역, 비교견적서, 현장사진, 등기부등본)<br>
+                    • 다온하우징 B안(SMC 표준시공) 채택: 공급가 132만 원 + 부가세 13.2만 원 = <strong>총 1,452,000원</strong> 청구<br>
+                    • 사전 독촉비용(내용증명 7,380원) + 인지대(900원) + 송달료(67,680원) = <strong>독촉절차비용 75,960원</strong> 산입 완료
                 </p>
             </div>
             <div class="guide-card">
-                <h3>⚖️ 2. 법원 송달 수정 방법</h3>
+                <h3>⚖️ 2. 법원 송달 회피 시 대응법</h3>
                 <p>
                     • 법원 등기마저 부재 시 <strong>'주소보정명령'</strong>으로 1901호 주민등록초본 합법 발급<br>
                     • 주소가 맞다면 <strong>'야간·휴일 특별송달'</strong> 신청하여 법원 집행관이 저녁/주말에 직접 방문 전달<br>
